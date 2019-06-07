@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Modal!</title>
+  </head>
+  <body>
+    <button id="launch">Launch the Modal</button>
+    <div class="modal">
+      <p>Email Signup:</p>
+      <input id="email" type="email" /><button id="submit">Submit Email</button>
+      <p id="warning" class="warning">Input field must not be blank.</p>
+      <button id="close">Close</button>
+    </div>
+
+    <script>
+      const launchButton = document.getElementById('launch');
+      const closeButton = document.getElementById('close');
+      const inputField = document.getElementById('email');
+      const submitButton = document.getElementById('submit');
+      const inputWarning = document.getElementById('warning');
+
+      const modals = document.getElementsByClassName('modal');
+      const firstModal = modals[0];
+
+      let email = '';
+
+      const closeModal = () => {
+        firstModal.classList.remove('visible');
+        email = '';
+        inputField.value = '';
+      };
+
+      launchButton.addEventListener('click', () => {
+        firstModal.classList.add('visible');
+      });
+
+      closeButton.addEventListener('click', () => {
+        inputWarning.classList.remove('visible');
+        closeModal();
+      });
+
+      inputField.addEventListener('input', evt => {
+        email = evt.target.value;
+        inputWarning.classList.remove('visible');
+      });
+
+      submitButton.addEventListener('click', () => {
+        if (email.length > 0) {
+          closeModal();
+        } else {
+          inputWarning.classList.add('visible');
+        }
+      });
+    </script>
+  </body>
+</html>
